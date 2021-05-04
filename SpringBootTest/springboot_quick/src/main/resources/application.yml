@@ -1,0 +1,41 @@
+##优先级 application*.yml<application*.yaml<application*.properties
+#普通数据的配置
+name: zhangsan
+
+
+#对象的配置
+person:
+  name: zhangsan
+  age: 18
+  addr: hangzhou
+
+#行内对象的配置
+#person: {name: zhangsan,age: 18,addr: hangzhou}
+
+
+#配置数据、集合(普通字符串)
+city:
+  - beijing
+  - shanghai
+  - guangzhou
+  - hangzhou
+
+#city: [beijing.shanghai,guangzhou,hangzhou]
+
+
+#配置数据、集合(对象数据)
+student:
+  - name: zhangsan
+    age: 18
+    addr: beijing
+  - name: lisi
+    age: 19
+    addr: shanghai
+
+#student: [{name: zhangsan,age: 18,addr:beijing},{name: lisi,age: 19,addr: shanghai}]
+
+
+#map配置(同#对象的配置)
+map:
+  key1: value1
+  key2: value2
