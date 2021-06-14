@@ -3,7 +3,6 @@ package com.itheima.mybatis.sqlsession.defaults;
 import com.itheima.mybatis.cfg.Configuration;
 import com.itheima.mybatis.sqlsession.SqlSession;
 import com.itheima.mybatis.sqlsession.SqlSessionFactory;
-import com.itheima.mybatis.utils.DefaultSqlSession;
 
 /**
  * SqlSessionFactory接口的实现类
@@ -21,6 +20,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
 
     /**
      * 用于创建一个新的操作数据库的对象
+     *
      * @return
      */
     @Override

@@ -1,6 +1,7 @@
 package com.itheima.mybatis.utils;
 
 //import com.itheima.mybatis.annotations.Select;
+
 import com.itheima.mybatis.cfg.Configuration;
 import com.itheima.mybatis.cfg.Mapper;
 import com.itheima.mybatis.io.Resources;
@@ -8,6 +9,7 @@ import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -170,49 +172,49 @@ public class XMLConfigBuilder {
      * @return
      *
     private static Map<String, Mapper> loadMapperAnnotation(String daoClassPath) throws Exception {
-        //定义返回值对象
-        Map<String, Mapper> mappers = new HashMap<String, Mapper>();
+    //定义返回值对象
+    Map<String, Mapper> mappers = new HashMap<String, Mapper>();
 
-        //1.得到dao接口的字节码对象
-        Class daoClass = Class.forName(daoClassPath);
-        //2.得到dao接口中的方法数组
-        Method[] methods = daoClass.getMethods();
-        //3.遍历Method数组
-        for (Method method : methods) {
-            //取出每一个方法，判断是否有select注解
-            boolean isAnnotated = method.isAnnotationPresent(Select.class);
-            if (isAnnotated) {
-                //创建Mapper对象
-                Mapper mapper = new Mapper();
-                //取出注解的value属性值
-                Select selectAnno = method.getAnnotation(Select.class);
-                String queryString = selectAnno.value();
-                mapper.setQueryString(queryString);
-                //获取当前方法的返回值，还要求必须带有泛型信息
-                Type type = method.getGenericReturnType();//List<User>
-                //判断type是不是参数化的类型
-                if (type instanceof ParameterizedType) {
-                    //强转
-                    ParameterizedType ptype = (ParameterizedType) type;
-                    //得到参数化类型中的实际类型参数
-                    Type[] types = ptype.getActualTypeArguments();
-                    //取出第一个
-                    Class domainClass = (Class) types[0];
-                    //获取domainClass的类名
-                    String resultType = domainClass.getName();
-                    //给Mapper赋值
-                    mapper.setResultType(resultType);
-                }
-                //组装key的信息
-                //获取方法的名称
-                String methodName = method.getName();
-                String className = method.getDeclaringClass().getName();
-                String key = className + "." + methodName;
-                //给map赋值
-                mappers.put(key, mapper);
-            }
-        }
-        return mappers;
+    //1.得到dao接口的字节码对象
+    Class daoClass = Class.forName(daoClassPath);
+    //2.得到dao接口中的方法数组
+    Method[] methods = daoClass.getMethods();
+    //3.遍历Method数组
+    for (Method method : methods) {
+    //取出每一个方法，判断是否有select注解
+    boolean isAnnotated = method.isAnnotationPresent(Select.class);
+    if (isAnnotated) {
+    //创建Mapper对象
+    Mapper mapper = new Mapper();
+    //取出注解的value属性值
+    Select selectAnno = method.getAnnotation(Select.class);
+    String queryString = selectAnno.value();
+    mapper.setQueryString(queryString);
+    //获取当前方法的返回值，还要求必须带有泛型信息
+    Type type = method.getGenericReturnType();//List<User>
+    //判断type是不是参数化的类型
+    if (type instanceof ParameterizedType) {
+    //强转
+    ParameterizedType ptype = (ParameterizedType) type;
+    //得到参数化类型中的实际类型参数
+    Type[] types = ptype.getActualTypeArguments();
+    //取出第一个
+    Class domainClass = (Class) types[0];
+    //获取domainClass的类名
+    String resultType = domainClass.getName();
+    //给Mapper赋值
+    mapper.setResultType(resultType);
+    }
+    //组装key的信息
+    //获取方法的名称
+    String methodName = method.getName();
+    String className = method.getDeclaringClass().getName();
+    String key = className + "." + methodName;
+    //给map赋值
+    mappers.put(key, mapper);
+    }
+    }
+    return mappers;
     }*/
 
 
