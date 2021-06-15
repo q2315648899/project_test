@@ -26,10 +26,10 @@ public class MapperProxy implements InvocationHandler {
     /**
      * 用于对方法进行增强的，我们的增强其实就是调用selectList方法
      *
-     * @param proxy
-     * @param method
-     * @param args
-     * @return
+     * @param proxy 代理对象的引用
+     * @param method 当前执行的方法
+     * @param args 当前执行方法所需的参数
+     * @return 和被代理对象具有相同的方法返回值
      * @throws Throwable
      */
     @Override
