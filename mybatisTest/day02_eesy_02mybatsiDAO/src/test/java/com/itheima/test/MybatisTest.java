@@ -82,7 +82,7 @@ public class MybatisTest {
     @Test
     public void testUpdate() {
         User user = new User();
-        user.setId(53);
+        user.setId(55);
         user.setUsername("mybastis update user");
         user.setAddress("北京市顺义区");
         user.setSex("女");
@@ -98,7 +98,7 @@ public class MybatisTest {
     @Test
     public void testDelete() {
         //5.执行删除方法
-        userDao.deleteUser(53);
+        userDao.deleteUser(55);
     }
 
     /**
