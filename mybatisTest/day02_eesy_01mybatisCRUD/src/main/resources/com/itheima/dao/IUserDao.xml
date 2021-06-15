@@ -12,4 +12,15 @@
     <insert id="saveUser" parameterType="com.itheima.domain.User">
         insert into user(username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
     </insert>
+
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.itheima.domain.User">
+        update user set username=#{username},address=#{address},sex=#{sex},birthday=#{birthday} where id=#{id}
+    </update>
+
+    <!-- 删除用户-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id = #{id}
+        <!-- 此处#{}内可随意设置参数名-->
+    </delete>
 </mapper>

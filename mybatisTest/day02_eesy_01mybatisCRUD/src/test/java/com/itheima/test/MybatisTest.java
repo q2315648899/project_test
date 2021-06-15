@@ -72,10 +72,36 @@ public class MybatisTest {
         user.setAddress("北京市顺义区");
         user.setSex("男");
         user.setBirthday(new Date());
-        System.out.println("保存操作之前："+user);
+        System.out.println("保存操作之前：" + user);
         //5.执行保存方法
         userDao.saveUser(user);
 
-        System.out.println("保存操作之后："+user);
+        System.out.println("保存操作之后：" + user);
+    }
+
+
+    /**
+     * 测试更新操作
+     */
+    @Test
+    public void testUpdate() {
+        User user = new User();
+        user.setId(50);
+        user.setUsername("mybastis update user");
+        user.setAddress("北京市顺义区");
+        user.setSex("女");
+        user.setBirthday(new Date());
+
+        //5.执行保存方法
+        userDao.updateUser(user);
+    }
+
+    /**
+     * 测试删除操作
+     */
+    @Test
+    public void testDelete() {
+        //5.执行删除方法
+        userDao.deleteUser(50);
     }
 }
