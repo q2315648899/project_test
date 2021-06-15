@@ -9,7 +9,15 @@
     </select>
 
     <!--保存用户-->
+    <!--新增用户后，同时还要返回当前新增用户的 id 值，因为 id 是由数据库的自动增长来实现的，所以就相
+    当于我们要在新增后将自动增长 auto_increment 的值返回。-->
+
     <insert id="saveUser" parameterType="com.itheima.domain.User">
+        <!-- 配置插入操作后，获取插入数据的id -->
+        <!-- keyProperty代表要返回的值对应实体类属性名称，keyColumn代表要返回的值对应列名。order:取值为AFTER代表插入后的行为。-->
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
         insert into user(username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
     </insert>
 
