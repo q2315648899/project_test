@@ -55,4 +55,10 @@
     <select id="findTotal" resultType="java.lang.Integer">
         select count(id) from user;
     </select>
+
+    <!-- 根据queryVo的条件查询用户 -->
+    <select id="findUserByVo" parameterType="com.itheima.domain.QueryVo" resultType="com.itheima.domain.User">
+        <!-- OGNL表达式：类中的写法：user.getUsername(); OGNL表达式写法：user.username-->
+        select * from user where username like #{user.username}
+    </select>
 </mapper>
