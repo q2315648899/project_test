@@ -3,27 +3,38 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.dao.IUserDao">
+
+    <!-- 配置 查询结果的列名和实体类的属性名的对应关系 -->
+    <resultMap id="userMap" type="com.itheima.domain.User">
+        <!-- 主键字段的对应 -->
+        <id property="userId" column="id"></id>
+        <!--非主键字段的对应-->
+        <result property="userName" column="username"></result>
+        <result property="userAddress" column="address"></result>
+        <result property="userSex" column="sex"></result>
+        <result property="userBirthday" column="birthday"></result>
+    </resultMap>
+
     <!--配置查询所有-->
-    <select id="findAll" resultType="com.itheima.domain.User">
+    <select id="findAll" resultMap="userMap">
         select * from user
     </select>
 
     <!--保存用户-->
     <!--新增用户后，同时还要返回当前新增用户的 id 值，因为 id 是由数据库的自动增长来实现的，所以就相
     当于我们要在新增后将自动增长 auto_increment 的值返回。-->
-
     <insert id="saveUser" parameterType="com.itheima.domain.User">
         <!-- 配置插入操作后，获取插入数据的id -->
         <!-- keyProperty代表要返回的值对应实体类属性名称，keyColumn代表要返回的值对应列名。order:取值为AFTER代表插入后的行为。-->
-        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+        <selectKey keyProperty="userId" keyColumn="id" resultType="int" order="AFTER">
             select last_insert_id();
         </selectKey>
-        insert into user(username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
+        insert into user(username,birthday,sex,address) values (#{userName},#{userBirthday},#{userSex},#{userAddress})
     </insert>
 
     <!-- 更新用户 -->
     <update id="updateUser" parameterType="com.itheima.domain.User">
-        update user set username=#{username},address=#{address},sex=#{sex},birthday=#{birthday} where id=#{id}
+        update user set username=#{userName},address=#{userAddress},sex=#{userSex},birthday=#{userBirthday} where id=#{userId}
     </update>
 
     <!-- 删除用户-->
@@ -33,7 +44,7 @@
     </delete>
 
     <!-- 根据id查询用户 -->
-    <select id="findById" parameterType="java.lang.Integer" resultType="com.itheima.domain.User">
+    <select id="findById" parameterType="java.lang.Integer" resultMap="userMap">
         select * from user where id = #{uid}
     </select>
 
@@ -46,7 +57,7 @@
     <!--${}表示拼接 sql 串
     通过${}可以将 parameterType 传入的内容拼接在 sql 中且不进行 jdbc 类型转换， ${}可以接收简
     单类型值或 pojo 属性值，如果 parameterType 传输单个简单类型值，${}括号中只能是 value。-->
-    <select id="findByName" parameterType="java.lang.String" resultType="com.itheima.domain.User">
+    <select id="findByName" parameterType="java.lang.String" resultMap="userMap">
         select * from user where username like #{name}
         <!-- select * from user where username like '%${value}%'-->
     </select>
@@ -57,8 +68,14 @@
     </select>
 
     <!-- 根据queryVo的条件查询用户 -->
-    <select id="findUserByVo" parameterType="com.itheima.domain.QueryVo" resultType="com.itheima.domain.User">
+    <select id="findUserByVo" parameterType="com.itheima.domain.QueryVo" resultMap="userMap">
         <!-- OGNL表达式：类中的写法：user.getUsername(); OGNL表达式写法：user.username-->
-        select * from user where username like #{user.username}
+        select * from user where username like #{user.userName}
     </select>
+
+    <!-- 基本类型和String我们可以直接写类型名称，也可以使用包名.类名的方式，例如：java.lang.String。
+    实体类类型，目前我们只能使用全限定类名。
+    究其原因，是mybaits在加载时已经把常用的数据类型注册了别名，从而我们在使用时可以不写包名，
+    而我们的是实体类并没有注册别名，所以必须写全限定类名。
+    可以参考 TypeAliasRegistery.class 的源码。-->
 </mapper>
