@@ -122,8 +122,19 @@ public class MybatisTest {
     public void testFindByName() {
         //5.执行查询一个方法
         List<User> users = userDao.findByName("%王%");
+//        List<User> users = userDao.findByName("王");
         for (User user : users) {
             System.out.println(user);
         }
+    }
+
+    /**
+     * 测试查询总记录条数
+     */
+    @Test
+    public void testFindTotal() {
+        //5.执行查询一个方法
+        int count = userDao.findTotal();
+        System.out.println(count);
     }
 }
