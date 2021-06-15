@@ -104,4 +104,26 @@ public class MybatisTest {
         //5.执行删除方法
         userDao.deleteUser(50);
     }
+
+    /**
+     * 测试查询操作
+     */
+    @Test
+    public void testFindOne() {
+        //5.执行查询一个方法
+        User user = userDao.findById(48);
+        System.out.println(user);
+    }
+
+    /**
+     * 测试模糊查询操作
+     */
+    @Test
+    public void testFindByName() {
+        //5.执行查询一个方法
+        List<User> users = userDao.findByName("%王%");
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
 }
