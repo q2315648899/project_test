@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.IUserDao">
+    <!--配置查询所有-->
+    <select id="findAll" resultType="com.itheima.domain.User">
+        select * from user
+    </select>
+
+    <!--保存用户-->
+    <!--新增用户后，同时还要返回当前新增用户的 id 值，因为 id 是由数据库的自动增长来实现的，所以就相
+    当于我们要在新增后将自动增长 auto_increment 的值返回。-->
+
+    <insert id="saveUser" parameterType="com.itheima.domain.User">
+        <!-- 配置插入操作后，获取插入数据的id -->
+        <!-- keyProperty代表要返回的值对应实体类属性名称，keyColumn代表要返回的值对应列名。order:取值为AFTER代表插入后的行为。-->
+        <selectKey keyProperty="id" keyColumn="id" resultType="int" order="AFTER">
+            select last_insert_id();
+        </selectKey>
+        insert into user(username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="updateUser" parameterType="com.itheima.domain.User">
+        update user set username=#{username},address=#{address},sex=#{sex},birthday=#{birthday} where id=#{id}
+    </update>
+
+    <!-- 删除用户-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where id = #{uid}
+        <!-- 非自定义数据类型参数，此处#{}内可随意设置参数名-->
+    </delete>
+
+    <!-- 根据id查询用户 -->
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.itheima.domain.User">
+        select * from user where id = #{uid}
+    </select>
+
+    <!-- 根据名称模糊查询 -->
+    <!--我们在上面将原来的#{}占位符，改成了${value}。注意如果用模糊查询的这种写法，那么${value}的写法就是固定的，不能写成其它名字。-->
+    <!--#{}表示一个占位符号
+    通过#{}可以实现 preparedStatement 向占位符中设置值，自动进行 java 类型和 jdbc 类型转换，
+    #{}可以有效防止 sql 注入。 #{}可以接收简单类型值或 pojo 属性值。 如果 parameterType 传输单个简单类
+    型值，#{}括号中可以是 value 或其它名称。-->
+    <!--${}表示拼接 sql 串
+    通过${}可以将 parameterType 传入的内容拼接在 sql 中且不进行 jdbc 类型转换， ${}可以接收简
+    单类型值或 pojo 属性值，如果 parameterType 传输单个简单类型值，${}括号中只能是 value。-->
+    <select id="findByName" parameterType="java.lang.String" resultType="com.itheima.domain.User">
+        select * from user where username like #{name}
+        <!-- select * from user where username like '%${value}%'-->
+    </select>
+
+    <!-- 获取用户的总记录条数 -->
+    <select id="findTotal" resultType="java.lang.Integer">
+        select count(id) from user;
+    </select>
+</mapper>
