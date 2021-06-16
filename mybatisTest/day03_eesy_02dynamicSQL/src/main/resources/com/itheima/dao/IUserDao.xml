@@ -38,11 +38,26 @@
         select * from user where username like #{user.userName}
     </select>
 
-    <!-- 根据条件查询-->
+    <!-- 根据条件查询
   <select id="findUserByCondition" resultMap="userMap" parameterType="user">
       select * from user where 1=1
       <if test="userName != null">
         and username = #{userName}
       </if>
-  </select>
+      <if test="userSex != null">
+          and sex = #{userSex}
+      </if>
+  </select>-->
+
+    <select id="findUserByCondition" resultMap="userMap" parameterType="user">
+        select * from user
+        <where>
+            <if test="userName != null">
+                and username = #{userName}
+            </if>
+            <if test="userSex != null">
+                and sex = #{userSex}
+            </if>
+        </where>
+    </select>
 </mapper>
