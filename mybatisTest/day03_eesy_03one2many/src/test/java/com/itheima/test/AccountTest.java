@@ -57,7 +57,9 @@ public class AccountTest {
     public void testFindAll() {
         List<Account> accounts = accountDao.findAll();
         for (Account account : accounts) {
+            System.out.println("--------每个account的信息------------");
             System.out.println(account);
+            System.out.println(account.getUser());
         }
     }
 
