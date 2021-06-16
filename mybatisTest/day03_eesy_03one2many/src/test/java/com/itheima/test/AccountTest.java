@@ -3,6 +3,7 @@ package com.itheima.test;
 import com.itheima.dao.IAccountDao;
 import com.itheima.dao.IUserDao;
 import com.itheima.domain.Account;
+import com.itheima.domain.AccountUser;
 import com.itheima.domain.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -55,8 +56,19 @@ public class AccountTest {
     @Test
     public void testFindAll() {
         List<Account> accounts = accountDao.findAll();
-        for(Account account : accounts){
+        for (Account account : accounts) {
             System.out.println(account);
+        }
+    }
+
+    /**
+     * 测试查询所有账户，同时包含用户名称和地址
+     */
+    @Test
+    public void testFindAllAccountUser() {
+        List<AccountUser> aus = accountDao.findAllAccount();
+        for (AccountUser au : aus) {
+            System.out.println(au);
         }
     }
 }
