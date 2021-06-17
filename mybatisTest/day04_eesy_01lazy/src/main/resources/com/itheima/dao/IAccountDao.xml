@@ -13,11 +13,17 @@
         select属性指定的内容：查询用户的唯一标识：
         column属性指定的内容：用户根据id查询时，所需要的参数的值
         -->
-        <association property="user" column="uid" javaType="user" select="com.itheima.dao.IUserDao.findById"></association>
+        <association property="user" column="uid" javaType="user"
+                     select="com.itheima.dao.IUserDao.findById"></association>
     </resultMap>
 
     <!-- 查询所有 -->
     <select id="findAll" resultMap="accountUserMap">
         select * from account
+    </select>
+
+    <!-- 根据用户id查询账户列表 -->
+    <select id="findAccountByUid" resultType="account">
+        select * from account where uid = #{uid}
     </select>
 </mapper>

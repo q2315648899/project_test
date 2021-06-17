@@ -12,16 +12,18 @@
         <result property="sex" column="sex"></result>
         <result property="birthday" column="birthday"></result>
         <!-- 配置user对象中accounts集合的映射 -->
-        <collection property="accounts" ofType="account">
-            <id column="aid" property="id"></id>
-            <result column="uid" property="uid"></result>
-            <result column="money" property="money"></result>
-        </collection>
+        <!-- collection 是用于建立一对多中集合属性的对应关系
+            ofType 用于指定集合元素的数据类型
+            select 是用于指定查询账户的唯一标识（账户的 dao 全限定类名加上方法名称）
+            column 是用于指定使用哪个字段的值作为条件查询
+        -->
+        <collection property="accounts" ofType="account" select="com.itheima.dao.IAccountDao.findAccountByUid"
+                    column="id"></collection>
     </resultMap>
 
     <!-- 查询所有 -->
     <select id="findAll" resultMap="userAccountMap">
-        select * from user u left outer join account a on u.id = a.uid
+        select * from user
     </select>
 
     <!-- 根据id查询用户 -->

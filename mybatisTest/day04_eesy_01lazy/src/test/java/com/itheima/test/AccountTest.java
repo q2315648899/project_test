@@ -55,8 +55,8 @@ public class AccountTest {
         for (Account account : accounts) {
             System.out.println("--------每个account的信息------------");
             // 启动了延迟加载后，打印或者调用account对象时才会发出 SQL 语句查询账户所关联的 User 对象的查询。
-            // System.out.println(account);
-            // System.out.println(account.getUser());
+             System.out.println(account);
+             System.out.println(account.getUser());
         }
     }
 }
