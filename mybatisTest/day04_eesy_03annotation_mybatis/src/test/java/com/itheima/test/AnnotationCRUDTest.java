@@ -60,4 +60,30 @@ public class AnnotationCRUDTest {
 
         userDao.updateUser(user);
     }
+
+    @Test
+    public void testDelete() {
+        userDao.deleteUser(61);
+    }
+
+    @Test
+    public void testFindOne() {
+        User user = userDao.findById(60);
+        System.out.println(user);
+    }
+
+    @Test
+    public void testFindByName() {
+//        List<User> users = userDao.findUserByName("%mybatis%");
+        List<User> users = userDao.findUserByName("王");
+        for (User user : users) {
+            System.out.println(user);
+        }
+    }
+
+    @Test
+    public void testFindTotal() {
+        int total = userDao.findTotalUser();
+        System.out.println(total);
+    }
 }
