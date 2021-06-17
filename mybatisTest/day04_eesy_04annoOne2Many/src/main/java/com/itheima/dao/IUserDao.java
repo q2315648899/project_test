@@ -16,20 +16,22 @@ public interface IUserDao {
 
     /**
      * 查询所有用户
+     * 一对多，一般使用延迟加载
      *
      * @return
      */
     @Select("select * from user")
-    @Results(id="userMap",value={
-            @Result(id=true,column = "id",property = "userId"),
-            @Result(column = "username",property = "userName"),
-            @Result(column = "address",property = "userAddress"),
-            @Result(column = "sex",property = "userSex"),
-            @Result(column = "birthday",property = "userBirthday"),
+    @Results(id = "userMap", value = {
+            @Result(id = true, column = "id", property = "userId"),
+            @Result(column = "username", property = "userName"),
+            @Result(column = "address", property = "userAddress"),
+            @Result(column = "sex", property = "userSex"),
+            @Result(column = "birthday", property = "userBirthday"),
+            @Result(property = "accounts", column = "id", many = @Many(select = "com.itheima.dao.IAccountDao.findAccountByUid", fetchType = FetchType.LAZY))
     })
     List<User> findAll();
 
-   /**
+    /**
      * 根据id查询用户
      *
      * @param userId

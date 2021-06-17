@@ -8,13 +8,24 @@ import java.util.List;
  * @author 黑马程序员
  * @Company http://www.ithiema.com
  */
-public class User implements Serializable{
+public class User implements Serializable {
 
     private Integer userId;
     private String userName;
     private String userAddress;
     private String userSex;
     private Date userBirthday;
+
+    //一对多关系映射：一个用户对应多个账户
+    private List<Account> accounts;
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
 
     public Integer getUserId() {
         return userId;

@@ -41,8 +41,10 @@ public class AnnotationCRUDTest {
     @Test
     public void testFindAll() {
         List<User> users = userDao.findAll();
-        for (User user : users) {
+        for(User user : users){
+            System.out.println("---每个用户的信息----");
             System.out.println(user);
+            System.out.println(user.getAccounts());
         }
     }
 
