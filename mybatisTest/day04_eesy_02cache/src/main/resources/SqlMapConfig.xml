@@ -3,8 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <!-- 配置properties-->
+    <!--二级缓存:-->
+    <!--它指的是Mybatis中SqlSessionFactory对象的缓存。由同一个SqlSessionFactory对象创建的SqlSession共享其缓存。-->
+    <!--二级缓存的使用步骤
+    第一步：让Mybatis框架支持二级缓存（在SqlMapConfig.xml中配置）
+    第二步：让当前的映射文件支持二级缓存（在IUserDao.xml中配置）
+    第三步：让当前的操作支持二级缓存（在select标签中配置）-->
+    <!--配置properties-->
     <properties resource="jdbcConfig.properties"></properties>
+
+    <!--让Mybatis框架支持二级缓存-->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
 
     <!--使用typeAliases配置别名，它只能配置domain中类的别名 -->
     <typeAliases>
