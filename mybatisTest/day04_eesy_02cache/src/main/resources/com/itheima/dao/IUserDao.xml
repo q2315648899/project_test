@@ -13,4 +13,9 @@
     <select id="findById" parameterType="INT" resultType="com.itheima.domain.User">
         select * from user where id = #{uid}
     </select>
+
+    <!-- 更新用户信息-->
+    <update id="updateUser" parameterType="user">
+        update user set username=#{username},address=#{address} where id=#{id}
+    </update>
 </mapper>

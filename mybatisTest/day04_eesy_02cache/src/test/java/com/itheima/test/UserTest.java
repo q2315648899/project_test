@@ -70,4 +70,26 @@ public class UserTest {
 
         System.out.println(user1 == user2);
     }
+
+    /**
+     * 测试缓存的同步
+     * 一级缓存是 SqlSession 范围的缓存，当调用 SqlSession 的修改，添加，删除，commit()，close()等
+     */
+    @Test
+    public void testClearlCache() {
+        //1.根据id查询用户
+        User user1 = userDao.findById(41);
+        System.out.println(user1);
+
+        //2.更新用户信息
+        user1.setUsername("update user clear cache");
+        user1.setAddress("北京市海淀区");
+        userDao.updateUser(user1);
+
+        //3.再次查询id为41的用户
+        User user2 = userDao.findById(41);
+        System.out.println(user2);
+
+        System.out.println(user1 == user2);
+    }
 }
