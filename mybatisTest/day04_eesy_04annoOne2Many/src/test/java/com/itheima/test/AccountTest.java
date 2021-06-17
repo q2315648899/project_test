@@ -43,8 +43,8 @@ public class AccountTest {
         List<Account> accounts = accountDao.findAll();
         for(Account account : accounts){
             System.out.println("----每个账户的信息-----");
-            System.out.println(account);
-            System.out.println(account.getUser());
+//            System.out.println(account);
+//            System.out.println(account.getUser());
         }
     }
 
