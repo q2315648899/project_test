@@ -23,6 +23,6 @@
     </environments>
     <!-- 指定带有注解的dao接口所在位置 -->
     <mappers>
-        <mapper class="com.itheima.dao.IUserDao"></mapper>
+        <package name="com.itheima.dao"></package>
     </mappers>
 </configuration>
