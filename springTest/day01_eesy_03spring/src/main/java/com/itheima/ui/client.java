@@ -31,16 +31,19 @@ public class client {
      * 核心容器的两个接口引发出的问题：
      *  ApplicationContext:     单例对象适用              采用此接口
      *      它在构建核心容器时，创建对象采取的策略是采用立即加载的方式。也就是说，只要一读取完配置文件马上就创建配置文件中配置的对象。
+     *      （ClassPathXmlApplicationContext：xml配置了scope为单例时，ApplicationContext的实现类ClassPathXmlApplicationContext采用立即加载。配置为多例时采用延迟加载
+     *      FileSystemXmlApplicationContext：无论xml配置了scope为单例或多例，FileSystemXmlApplicationContext都采用延迟加载）
      *
      *  BeanFactory:            多例对象使用
      *      它在构建核心容器时，创建对象采取的策略是采用延迟加载的方式。也就是说，什么时候根据id获取对象了，什么时候才真正的创建对象。
+     *      （BeanFactory：无论xml配置了scope为单例或多例，BeanFactory都采用延迟加载）
      * @param args
      */
     public static void main(String[] args) {
         //--------ApplicationContext----------
         //1.获取核心容器对象
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
-//        ApplicationContext ac = new FileSystemXmlApplicationContext("C:\\Users\\wong\\Desktop\\bean.xml");
+//        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ApplicationContext ac = new FileSystemXmlApplicationContext("C:\\Users\\wong\\Desktop\\bean.xml");
 //        //2.根据id获取Bean对象
         IAccountService as = (IAccountService) ac.getBean("accountService");
         IAccountDao adao = ac.getBean("accountDao", IAccountDao.class);
