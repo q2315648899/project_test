@@ -25,7 +25,10 @@ public class client {
 //        IAccountService as = (IAccountService) ac.getBean("accountService");
 //        as.saveAccount();
 
-        IAccountService as = (IAccountService) ac.getBean("accountService2");
+//        IAccountService as = (IAccountService) ac.getBean("accountService2");
+//        as.saveAccount();
+
+        IAccountService as  = (IAccountService)ac.getBean("accountService3");
         as.saveAccount();
     }
 }
