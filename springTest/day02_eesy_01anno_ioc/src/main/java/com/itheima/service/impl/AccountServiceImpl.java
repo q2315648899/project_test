@@ -3,6 +3,7 @@ package com.itheima.service.impl;
 import com.itheima.dao.IAccountDao;
 import com.itheima.dao.impl.AccountDaoImpl;
 import com.itheima.service.IAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -28,6 +29,14 @@ import org.springframework.stereotype.Component;
  *
  * 用于注入数据的
  *      他们的作用就和在xml配置文件中的bean标签中写一个<property>标签的作用是一样的
+ *      Autowired:
+ *          作用：自动按照类型注入。只要容器中有唯一的一个bean对象类型和要注入的变量类型匹配，就可以注入成功
+ *                如果ioc容器中没有任何bean的类型和要注入的变量类型匹配，则报错。
+ *                如果Ioc容器中有多个类型匹配时：
+ *          出现位置：
+ *              可以是变量上，也可以是方法上
+ *          细节：
+ *              在使用注解注入时，set方法就不是必须的了。
  * 用于改变作用范围的
  *      他们的作用就和在bean标签中使用scope属性实现的功能是一样的
  * 和生命周期相关 了解
@@ -38,11 +47,8 @@ import org.springframework.stereotype.Component;
 @Component("accountService")
 public class AccountServiceImpl implements IAccountService {
 
-    private IAccountDao accountDao = new AccountDaoImpl();
-
-    public AccountServiceImpl() {
-        System.out.println("对象创建了");
-    }
+    @Autowired
+    private IAccountDao accountDao = null;
 
     public void saveAccount() {
         accountDao.saveAccount();
