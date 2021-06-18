@@ -30,9 +30,10 @@ public class client {
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         //2.根据id获取Bean对象
         IAccountService as = (IAccountService) ac.getBean("accountService");
-
         System.out.println(as);
-        as.saveAccount();
 
+        IAccountDao adao = ac.getBean("accountDao",IAccountDao.class);
+        System.out.println(adao);
+//        as.saveAccount();
     }
 }
