@@ -19,16 +19,19 @@ import org.springframework.core.io.Resource;
 public class client {
 
     /**
+     * spring会根据创建的是单例或多例对象，使用立即加载或延迟加载（单例是立即加载，多例是延迟加载）
      * @param args
      */
     public static void main(String[] args) {
         //--------ApplicationContext----------
         //1.获取核心容器对象
-        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+//        ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
+        ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         //2.根据id获取Bean对象
-        IAccountService as1 = (IAccountService) ac.getBean("accountService");
-        IAccountService as2 = (IAccountService) ac.getBean("accountService");
-//        as.saveAccount();
-        System.out.println(as1 == as2);
+        IAccountService as  = (IAccountService)ac.getBean("accountService");
+        as.saveAccount();
+
+        //手动关闭容器（如果不手动关闭容器，bean对象不会执行销毁）
+        ac.close();
     }
 }
