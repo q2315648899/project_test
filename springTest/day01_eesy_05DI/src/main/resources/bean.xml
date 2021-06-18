@@ -50,4 +50,23 @@
 
     <!-- 配置一个日期对象 -->
     <bean id="now" class="java.util.Date"></bean>
+
+
+    <!-- set方法注入                更常用的方式
+        涉及的标签：property
+        出现的位置：bean标签的内部
+        标签的属性
+            name：用于指定注入时所调用的set方法名称
+            value：用于提供基本类型和String类型的数据
+            ref：用于指定其他的bean类型数据。它指的就是在spring的Ioc核心容器中出现过的bean对象
+        优势：
+            创建对象时没有明确的限制，可以直接使用默认构造函数
+        弊端：
+            如果有某个成员必须有值，则获取对象是有可能set方法没有执行。
+    -->
+    <bean id="accountService2" class="com.itheima.service.impl.AccountServiceImpl2">
+        <property name="name" value="TEST"></property>
+        <property name="age" value="21"></property>
+        <property name="birthday" ref="now"></property>
+    </bean>
 </beans>
