@@ -1,5 +1,6 @@
 package com.itheima.ui;
 
+import com.itheima.factory.BeanFactory;
 import com.itheima.service.IAccountService;
 import com.itheima.service.impl.AccountServiceImpl;
 
@@ -11,7 +12,9 @@ import com.itheima.service.impl.AccountServiceImpl;
  */
 public class client {
     public static void main(String[] args) {
-        IAccountService as = new AccountServiceImpl();
+//        IAccountService as = new AccountServiceImpl();
+        IAccountService as = (IAccountService) BeanFactory.getBean("accountService");
         as.saveAccount();
+
     }
 }
