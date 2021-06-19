@@ -15,6 +15,18 @@ import javax.sql.DataSource;
  */
 public class JdbcConfig {
 
+    @Value("${jdbc.driver}")
+    private String driver;
+
+    @Value("${jdbc.url}")
+    private String url;
+
+    @Value("${jdbc.username}")
+    private String username;
+
+    @Value("${jdbc.password}")
+    private String password;
+
     /**
      * 用于创建一个QueryRunner对象
      * @param dataSource
@@ -34,10 +46,10 @@ public class JdbcConfig {
     public DataSource createDataSource() {
         try {
             ComboPooledDataSource ds = new ComboPooledDataSource();
-            ds.setDriverClass("com.mysql.jdbc.Driver");
-            ds.setJdbcUrl("jdbc:mysql://localhost:3306/eesy");
-            ds.setUser("root");
-            ds.setPassword("123456");
+            ds.setDriverClass(driver);
+            ds.setJdbcUrl(url);
+            ds.setUser(username);
+            ds.setPassword(password);
             return ds;
         } catch (Exception e) {
             throw new RuntimeException(e);
