@@ -5,8 +5,11 @@ import com.itheima.dao.impl.AccountDaoImpl;
 import com.itheima.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 /**
@@ -57,20 +60,43 @@ import javax.annotation.Resource;
  *          属性：
  *              value：用于指定数据的值。它可以使用spring中SpEL(也就是spring的el表达式）
  *                      SpEL的写法：${表达式}
+ *
+ *
  * 用于改变作用范围的
  *      他们的作用就和在bean标签中使用scope属性实现的功能是一样的
+ *      Scope
+ *          作用：用于指定bean的作用范围
+ *          属性：
+ *              value：指定范围的取值。常用取值：singleton prototype
+ *
+ *
  * 和生命周期相关 了解
  *      他们的作用就和在bean标签中使用init-method和destroy-methode的作用是一样的
+ *      PreDestroy
+ *          作用：用于指定销毁方法
+ *      PostConstruct
+ *          作用：用于指定初始化方法
  * @Author: wong
  * @Date: 2021/6/18
  */
 @Component("accountService")
+@Scope("prototype")
 public class AccountServiceImpl implements IAccountService {
 
 //    @Autowired
 //    @Qualifier("accountDao1")
     @Resource(name = "accountDao2")
     private IAccountDao accountDao = null;
+
+    @PostConstruct
+    public void  init(){
+        System.out.println("初始化方法执行了");
+    }
+
+    @PreDestroy
+    public void  destroy(){
+        System.out.println("销毁方法执行了");
+    }
 
     public void saveAccount() {
         accountDao.saveAccount();
