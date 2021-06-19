@@ -34,7 +34,7 @@ public class JdbcConfig {
      */
     @Bean(name = "runner")
     @Scope("prototype")
-    public QueryRunner createQueryRunner(DataSource dataSource) {
+    public QueryRunner createQueryRunner(@Qualifier("ds2") DataSource dataSource) {
         return new QueryRunner(dataSource);
     }
 
@@ -42,12 +42,26 @@ public class JdbcConfig {
      * 创建数据源对象
      * @return
      */
-    @Bean(name = "dataSource")
+    @Bean(name = "ds2")
     public DataSource createDataSource() {
         try {
             ComboPooledDataSource ds = new ComboPooledDataSource();
             ds.setDriverClass(driver);
             ds.setJdbcUrl(url);
+            ds.setUser(username);
+            ds.setPassword(password);
+            return ds;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Bean(name="ds1")
+    public DataSource createDataSource1() {
+        try {
+            ComboPooledDataSource ds = new ComboPooledDataSource();
+            ds.setDriverClass(driver);
+            ds.setJdbcUrl("jdbc:mysql://localhost:3306/eesy02");
             ds.setUser(username);
             ds.setPassword(password);
             return ds;
