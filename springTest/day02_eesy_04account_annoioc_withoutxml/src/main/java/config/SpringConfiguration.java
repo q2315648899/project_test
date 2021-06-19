@@ -36,6 +36,7 @@ public class SpringConfiguration {
      * @return
      */
     @Bean(name = "runner")
+    @Scope("prototype")
     public QueryRunner createQueryRunner(DataSource dataSource) {
         return new QueryRunner(dataSource);
     }
