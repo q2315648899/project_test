@@ -25,37 +25,16 @@ import javax.sql.DataSource;
  *     细节：
  *         当我们使用注解配置方法时，如果方法有参数，spring框架会去容器中查找有没有可用的bean对象。
  *         查找的方式和Autowired注解的作用是一样的
+ * Import
+ *     作用：用于导入其他的配置类
+ *     属性：
+ *         value：用于指定其他配置类的字节码。
+ *                 当我们使用Import的注解之后，有Import注解的类就是父配置类，而导入的都是子配置类
  */
-@Configuration
+//@Configuration
 @ComponentScan("com.itheima")
+@Import(JdbcConfig.class)
 public class SpringConfiguration {
 
-    /**
-     * 用于创建一个QueryRunner对象
-     * @param dataSource
-     * @return
-     */
-    @Bean(name = "runner")
-    @Scope("prototype")
-    public QueryRunner createQueryRunner(DataSource dataSource) {
-        return new QueryRunner(dataSource);
-    }
 
-    /**
-     * 创建数据源对象
-     * @return
-     */
-    @Bean(name = "dataSource")
-    public DataSource createDataSource() {
-        try {
-            ComboPooledDataSource ds = new ComboPooledDataSource();
-            ds.setDriverClass("com.mysql.jdbc.Driver");
-            ds.setJdbcUrl("jdbc:mysql://localhost:3306/eesy");
-            ds.setUser("root");
-            ds.setPassword("123456");
-            return ds;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
