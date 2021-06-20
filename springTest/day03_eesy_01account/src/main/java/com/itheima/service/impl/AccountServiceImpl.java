@@ -3,6 +3,7 @@ package com.itheima.service.impl;
 import com.itheima.dao.IAccountDao;
 import com.itheima.domain.Account;
 import com.itheima.service.IAccountService;
+import com.itheima.utils.TransactionManager;
 
 import java.util.List;
 
@@ -14,6 +15,12 @@ import java.util.List;
 public class AccountServiceImpl implements IAccountService{
 
     private IAccountDao accountDao;
+
+    private TransactionManager txManager;
+
+    public void setTxManager(TransactionManager txManager) {
+        this.txManager = txManager;
+    }
 
     public void setAccountDao(IAccountDao accountDao) {
         this.accountDao = accountDao;
