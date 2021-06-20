@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * 账户的业务层实现类
+ * 
+ * 事务控制应该都是在业务层
  */
 public class AccountServiceImpl implements IAccountService {
 
