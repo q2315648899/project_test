@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 /**
  * 和spring连接数据库相关的配置类
+ * 使用@Bean把当前方法的返回值作为bean对象存入spring的ioc容器中时，这个@Bean所在的类必须设置为一个配置类
  */
 public class JdbcConfig {
 
