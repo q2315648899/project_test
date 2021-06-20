@@ -16,12 +16,6 @@ public class AccountServiceImpl implements IAccountService{
 
     private IAccountDao accountDao;
 
-    private TransactionManager txManager;
-
-    public void setTxManager(TransactionManager txManager) {
-        this.txManager = txManager;
-    }
-
     public void setAccountDao(IAccountDao accountDao) {
         this.accountDao = accountDao;
     }
