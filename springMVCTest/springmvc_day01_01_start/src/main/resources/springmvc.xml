@@ -20,6 +20,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 开启SpringMVC框架注解的支持 -->
+    <!-- 开启SpringMVC框架注解的支持。比如支持类似@RequestMapping的注解 -->
     <mvc:annotation-driven/>
 </beans>
