@@ -12,5 +12,7 @@
 </head>
 <body>
 
+    <h3>重定向</h3>
+
 </body>
 </html>
