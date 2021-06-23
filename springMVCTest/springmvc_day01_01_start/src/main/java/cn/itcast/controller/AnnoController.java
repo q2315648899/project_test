@@ -64,6 +64,17 @@ public class AnnoController {
         System.out.println(header);
         return "success";
     }
+
+    /**
+     * 获取Cookie的值
+     * @return
+     */
+    @RequestMapping(value="/testCookieValue")
+    public String testCookieValue(@CookieValue(value="JSESSIONID") String cookieValue){
+        System.out.println("执行了...");
+        System.out.println(cookieValue);
+        return "success";
+    }
 }
 
 
