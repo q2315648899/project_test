@@ -3,7 +3,9 @@ package cn.itcast.controller;
 import cn.itcast.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,6 +94,15 @@ public class UserController {
         // 重定向。contrller 方法提供了一个 String 类型返回值之后，它需要在返回值里使用:redirect:
         return "redirect:/index.jsp";// 需要注意的是，如果是重定向到 jsp 页面，则 jsp 页面不能写在 WEB-INF 目录中，否则无法找到。
 
+    }
+
+    /**
+     * 模拟异步请求响应
+     */
+    @RequestMapping("/testAjax")
+    public void testAjax(@RequestBody String body){
+        System.out.println("testAjax方法执行了...");
+        System.out.println(body);
     }
 }
 
