@@ -22,7 +22,7 @@ import java.util.Map;
 public class AnnoController {
 
     @RequestMapping("/testRequestParam")
-    public String testRequestParam(@RequestParam(name="name") String username){
+    public String testRequestParam(@RequestParam(name = "name") String username) {
         System.out.println("执行了...");
         System.out.println(username);
         return "success";
@@ -30,10 +30,11 @@ public class AnnoController {
 
     /**
      * 获取到请求体的内容
+     *
      * @return
      */
     @RequestMapping("/testRequestBody")
-    public String testRequestBody(@RequestBody String body){
+    public String testRequestBody(@RequestBody String body) {
         System.out.println("执行了...");
         System.out.println(body);
         return "success";
@@ -41,12 +42,26 @@ public class AnnoController {
 
     /**
      * PathVariable注解
+     *
      * @return
      */
-    @RequestMapping(value="/testPathVariable/{sid}")
-    public String testPathVariable(@PathVariable(name="sid") String id){
+    @RequestMapping(value = "/testPathVariable/{sid}")
+    public String testPathVariable(@PathVariable(name = "sid") String id) {
         System.out.println("执行了...");
         System.out.println(id);
+        return "success";
+    }
+
+    /**
+     * 获取请求头的值
+     *
+     * @param header
+     * @return
+     */
+    @RequestMapping(value = "/testRequestHeader")
+    public String testRequestHeader(@RequestHeader(value = "Accept") String header) {
+        System.out.println("执行了...");
+        System.out.println(header);
         return "success";
     }
 }
