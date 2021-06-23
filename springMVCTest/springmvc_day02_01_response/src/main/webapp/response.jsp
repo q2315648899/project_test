@@ -27,7 +27,10 @@
                     type:"post",
                     success:function(data){
                         // data服务器端响应的json的数据，进行解析
-
+                        alert(data);
+                        alert(data.username);
+                        alert(data.password);
+                        alert(data.age);
                     }
                 });
             });

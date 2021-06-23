@@ -100,9 +100,15 @@ public class UserController {
      * 模拟异步请求响应
      */
     @RequestMapping("/testAjax")
-    public void testAjax(@RequestBody String body){
+    public @ResponseBody User testAjax(@RequestBody User user){
         System.out.println("testAjax方法执行了...");
-        System.out.println(body);
+        // 客户端发送ajax的请求，传的是json字符串，后端把json字符串封装到user对象中
+        System.out.println(user);
+        // 做响应，模拟查询数据库
+        user.setUsername("haha");
+        user.setAge(40);
+        // 做响应
+        return user;
     }
 }
 
