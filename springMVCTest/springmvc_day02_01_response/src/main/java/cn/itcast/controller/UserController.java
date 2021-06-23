@@ -77,6 +77,22 @@ public class UserController {
 
         return mv;
     }
+
+    /**
+     * 使用关键字的方式进行转发或者重定向
+     * @return
+     */
+    @RequestMapping("/testForwardOrRedirect")
+    public String testForwardOrRedirect(){
+        System.out.println("testForwardOrRedirect方法执行了...");
+
+        // 请求的转发。controller 方法在提供了 String 类型的返回值之后，默认就是请求转发。我们也可以写成：
+        // return "forward:/WEB-INF/pages/success.jsp";// 需要注意的是，如果用了 formward：则路径必须写成实际视图 url，不能写逻辑视图。
+
+        // 重定向。contrller 方法提供了一个 String 类型返回值之后，它需要在返回值里使用:redirect:
+        return "redirect:/index.jsp";// 需要注意的是，如果是重定向到 jsp 页面，则 jsp 页面不能写在 WEB-INF 目录中，否则无法找到。
+
+    }
 }
 
 

@@ -22,5 +22,9 @@
 
     <a href="user/testModelAndView" >testModelAndView</a>
 
+    <br/>
+
+    <a href="user/testForwardOrRedirect" >testForwardOrRedirect</a>
+
 </body>
 </html>
