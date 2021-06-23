@@ -113,6 +113,43 @@ public class AnnoController {
      }
      */
 
+    /**
+     * SessionAttributes的注解
+     * @return
+     */
+    @RequestMapping(value="/testSessionAttributes")
+    public String testSessionAttributes(Model model){
+        System.out.println("testSessionAttributes...");
+        // 底层会存储到request域对象中
+        model.addAttribute("msg","美美");
+        return "success";
+    }
+
+    /**
+     * 获取值
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value="/getSessionAttributes")
+    public String getSessionAttributes(ModelMap modelMap){//ModelMap是Model的实现类
+        System.out.println("getSessionAttributes...");
+        String msg = (String) modelMap.get("msg");
+        System.out.println(msg);
+        return "success";
+    }
+
+    /**
+     * 清除
+     * @param status
+     * @return
+     */
+    @RequestMapping(value="/delSessionAttributes")
+    public String delSessionAttributes(SessionStatus status){
+        System.out.println("getSessionAttributes...");
+        status.setComplete();
+        return "success";
+    }
+
 }
 
 
