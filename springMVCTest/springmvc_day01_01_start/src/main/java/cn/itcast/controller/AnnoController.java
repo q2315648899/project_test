@@ -38,6 +38,17 @@ public class AnnoController {
         System.out.println(body);
         return "success";
     }
+
+    /**
+     * PathVariable注解
+     * @return
+     */
+    @RequestMapping(value="/testPathVariable/{sid}")
+    public String testPathVariable(@PathVariable(name="sid") String id){
+        System.out.println("执行了...");
+        System.out.println(id);
+        return "success";
+    }
 }
 
 
