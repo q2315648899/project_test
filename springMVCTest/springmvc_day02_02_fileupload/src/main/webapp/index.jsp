@@ -9,6 +9,12 @@
 <html>
 <head>
     <title>文件上传</title>
+
+    <form action="/user/fileupload1" method="post" enctype="multipart/form-data">
+        选择文件：<input type="file" name="upload"/><br/>
+        <input type="submit" value="上传"/>
+    </form>
+
 </head>
 <body>
 
