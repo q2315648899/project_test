@@ -30,4 +30,15 @@ public class AccountController {
         model.addAttribute("list",list);
         return "list";
     }
+
+    /**
+     * 保存
+     * @return
+     */
+    @RequestMapping("/save")
+    public void save(Account account, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        accountService.saveAccount(account);
+        response.sendRedirect(request.getContextPath()+"/account/findAll");
+        return;
+    }
 }
