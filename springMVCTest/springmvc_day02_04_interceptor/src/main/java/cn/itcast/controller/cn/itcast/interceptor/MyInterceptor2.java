@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * 自定义拦截器
  */
-public class MyInterceptor1 implements HandlerInterceptor{
+public class MyInterceptor2 implements HandlerInterceptor{
 
     /**
      * 预处理，controller方法执行前
@@ -22,8 +22,8 @@ public class MyInterceptor1 implements HandlerInterceptor{
      * @throws Exception
      */
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("MyInterceptor1执行了...前1111");
-//        request.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(request,response);
+        System.out.println("MyInterceptor2执行了...前2222");
+        // request.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(request,response);
         return true;
     }
 
@@ -36,7 +36,7 @@ public class MyInterceptor1 implements HandlerInterceptor{
      * @throws Exception
      */
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("MyInterceptor1执行了...后1111");
+        System.out.println("MyInterceptor2执行了...后2222");
         // request.getRequestDispatcher("/WEB-INF/pages/error.jsp").forward(request,response);
     }
 
@@ -49,8 +49,9 @@ public class MyInterceptor1 implements HandlerInterceptor{
      * @throws Exception
      */
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("MyInterceptor1执行了...最后1111");
+        System.out.println("MyInterceptor2执行了...最后2222");
     }
+
 }
 
 
