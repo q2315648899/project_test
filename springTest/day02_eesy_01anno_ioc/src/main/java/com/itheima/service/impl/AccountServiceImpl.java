@@ -35,7 +35,7 @@ import javax.annotation.Resource;
  *
  *
  * 用于注入数据的
- *      他们的作用就和在xml配置文件中的bean标签中写一个<property>标签的作用是一样的
+ *      他们的作用就和在xml配置文件中的bean标签中写一个<property>标签的作用是一样的（当注解在属性字段上时）
  *      Autowired:
  *          作用：自动按照类型注入。只要容器中有唯一的一个bean对象类型和要注入的变量类型匹配，就可以注入成功
  *                如果ioc容器中没有任何bean的类型和要注入的变量类型匹配，则报错。

@@ -28,6 +28,10 @@ public class JdbcConfig {
     @Value("${jdbc.password}")
     private String password;
 
+    public JdbcConfig() {
+        int i = 1;
+    }
+
     /**
      * 用于创建一个QueryRunner对象
      * @param dataSource
