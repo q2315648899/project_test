@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.mapper.BrandMapper" >
+
+    <insert id="insert" parameterType="brand">
+        insert into brand (id, name ,first_char) values (null , #{name}, #{firstChar})
+    </insert>
+
+
+    <update id="update" parameterType="brand">
+        UPDATE brand
+        <set>
+            <if test="name != null and name != '' " >
+                NAME = ? ,
+            </if>
+            <if test="firstChar != null and firstChar != '' " >
+                first_char = ?
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from brand where id = #{id}
+    </delete>
+
+    <select id="selectOne" parameterType="int" resultType="brand" >
+        select * from brand where id = #{id}
+    </select>
+
+
+    <select id="selectList" resultType="brand">
+        select * from brand
+    </select>
+
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.mapper.OperationLogMapper" >
+
+    <insert id="insert" parameterType="operationLog">
+        INSERT INTO operation_log(id,return_value,return_class,operate_user,operate_time,param_and_value,operate_class,operate_method,cost_time)
+		VALUES(NULL,#{returnValue},#{returnClass},#{operateUser},#{operateTime},#{paramAndValue},#{operateClass},#{operateMethod},#{costTime})
+    </insert>
+
+    <select id="countByCondition" resultType="long" parameterType="map">
+        SELECT COUNT(*) FROM `operation_log`
+        <include refid="query_where"></include>
+    </select>
+    
+    
+    <select id="findByCondition" parameterType="map" resultType="operationLog">
+        SELECT
+            o.id,
+            o.operate_class AS operateClass ,
+            o.operate_method AS operateMethod,
+            o.return_class AS returnClass,
+            o.operate_user AS operateUser,
+            o.operate_time AS operateTime,
+            o.param_and_value AS paramAndValue,
+            o.cost_time AS costTime,
+            o.return_value AS returnValue
+        FROM
+            operation_log o,
+            (SELECT id FROM operation_log
+            <include refid="query_where"></include>
+            ORDER BY id LIMIT #{start} , #{rows}) a
+        where
+            o.id = a.id
+    </select>
+
+
+    <sql id="query_where">
+        <where>
+            <if test="operateUser != null and operateUser != ''">
+                and operate_user = #{operateUser}
+            </if>
+            <if test="operateMethod != null and operateMethod != ''">
+                and operate_method = #{operateMethod}
+            </if>
+            <if test="returnClass != null and returnClass != ''">
+                and return_class = #{returnClass}
+            </if>
+            <if test="costTime != null">
+                and cost_time = #{costTime}
+            </if>
+        </where>
+    </sql>
+
+
+</mapper>

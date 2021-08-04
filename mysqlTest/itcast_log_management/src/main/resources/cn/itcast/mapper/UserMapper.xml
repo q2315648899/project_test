@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.itcast.mapper.UserMapper" >
+
+    <insert id="insert" parameterType="user">
+        INSERT INTO USER(id,username,PASSWORD,NAME,birthday,sex,email,phone,qq)
+        VALUE(null , #{username} , #{password} , #{name} , #{birthday} , #{sex} , #{email} , #{qq})
+    </insert>
+
+
+    <update id="update" parameterType="user">
+        UPDATE user
+        <set>
+            <if test="username != null and username != '' " >
+                username = ? ,
+            </if>
+            <if test="password != null and password != '' " >
+                password = ? ,
+            </if>
+            <if test="name != null and name != '' " >
+                name = ? ,
+            </if>
+            <if test="birthday != null " >
+                birthday = ? ,
+            </if>
+            <if test="sex != null and sex != '' " >
+                sex = ? ,
+            </if>
+            <if test="email != null and email != '' " >
+                email = ? ,
+            </if>
+            <if test="qq != null and qq != '' " >
+                qq = ?
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+
+    <delete id="delete" parameterType="int">
+        delete from user where id = #{id}
+    </delete>
+
+
+    <select id="selectOne" parameterType="int" resultType="user" >
+        select * from user where id = #{id}
+    </select>
+
+
+    <select id="selectList" resultType="user">
+        select * from user
+    </select>
+
+</mapper>
