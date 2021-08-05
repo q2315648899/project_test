@@ -57,7 +57,8 @@ public class Client {
                 Float money = (Float)args[0];
                 //2.判断当前方法是不是销售
                 if("saleProduct".equals(method.getName())) {
-                    returnValue = method.invoke(producer, money*0.8f);
+//                    returnValue = methodProxy.invokeSuper(proxy,new Object[]{money*0.8f});//proxy是代理对象引用，methodProxy.invokeSuper(proxy,new Object[]{money*0.8f})表示反射执行代理对象的父类（也就是被代理对象）的方法
+                    returnValue = method.invoke(producer, money*0.8f);//producer是被代理对象，method.invoke(producer, money*0.8f)表示反射执行被代理对象的方法（和上面的效果一样），此处也可用methodProxy.invoke(producer, money*0.8f)
                 }
                 return returnValue;
             }
