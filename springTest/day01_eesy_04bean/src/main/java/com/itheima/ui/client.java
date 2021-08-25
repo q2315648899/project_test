@@ -30,8 +30,10 @@ public class client {
      * 核心容器的两个接口引发出的问题：
      *  ApplicationContext:     单例对象适用              采用此接口
      *      它在构建核心容器时，创建对象采取的策略是采用立即加载的方式。也就是说，只要一读取完配置文件马上就创建配置文件中配置的对象。
-     *      （ClassPathXmlApplicationContext：xml配置了scope为单例时，ApplicationContext的实现类ClassPathXmlApplicationContext采用立即加载。配置为多例时采用延迟加载
-     *      FileSystemXmlApplicationContext：无论xml配置了scope为单例或多例，FileSystemXmlApplicationContext都采用延迟加载）
+     *      （ClassPathXmlApplicationContext：xml配置了scope为单例时，ApplicationContext的实现类ClassPathXmlApplicationContext采用立即加载。配置为多例时采用延迟加载。
+     *      FileSystemXmlApplicationContext：和ClassPathXmlApplicationContext一样。
+     *      AnnotationConfigApplicationContext：和ClassPathXmlApplicationContext一样。）
+     *      注意：也就是说采用ApplicationContext接口构建核心容器时，会自动根据要创建的对象是否为单例或多例，来决定对该对象采取立即加载或延迟加载的创建方式。
      *
      *  BeanFactory:            多例对象使用
      *      它在构建核心容器时，创建对象采取的策略是采用延迟加载的方式。也就是说，什么时候根据id获取对象了，什么时候才真正的创建对象。
