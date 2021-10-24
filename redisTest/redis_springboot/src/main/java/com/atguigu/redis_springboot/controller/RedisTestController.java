@@ -73,7 +73,7 @@ public class RedisTestController {
     @GetMapping("testLock")
     public void testLock(){
         String uuid = UUID.randomUUID().toString();
-        //1获取锁，setne
+        //1获取锁，setnx
         Boolean lock = redisTemplate.opsForValue().setIfAbsent("lock", uuid,3, TimeUnit.SECONDS);
         //2获取锁成功、查询num的值
         if(lock){
